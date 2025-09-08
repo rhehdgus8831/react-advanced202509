@@ -5,7 +5,7 @@ import CartContext from '../../context/cart-context.js';
 
 const CartItem = ({ cart }) => {
 
-    const {addToCartItem }=useContext(CartContext);
+    const {addToCartItem, removeToCartItem }=useContext(CartContext);
 
     const { id, name, price, amount } = cart;
 
@@ -28,6 +28,11 @@ const CartItem = ({ cart }) => {
         });
     }
 
+    const handleRemoveClick = e => {
+        removeToCartItem(id)
+    }
+
+
     return (
         <li className={cartItem}>
             <div>
@@ -38,7 +43,7 @@ const CartItem = ({ cart }) => {
                 </div>
             </div>
             <div className={actions}>
-                <button>−</button>
+                <button onClick={handleRemoveClick}>−</button>
                 <button onClick={handleAddClick}>+</button>
             </div>
         </li>

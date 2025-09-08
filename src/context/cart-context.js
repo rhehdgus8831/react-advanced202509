@@ -9,7 +9,8 @@ const defaultValue = {
     openModal: () => {},
     closeModal: () => {},
     cartItems: [],
-    addToCartItem: (cartItems) => {}
+    addToCartItem: (cartItems) => {},
+    removeToCartItem: (id) => {},
 };
 
 const  CartContext = createContext(defaultValue);
