@@ -3,6 +3,15 @@
 
 import {createContext} from 'react';
 
-const  CartContext = createContext({});
+// 자동완성을 위한 세팅
+const defaultValue = {
+    cartIsShown : false,
+    openModal: () => {},
+    closeModal: () => {},
+    cartItems: [],
+    addToCartItem: (cartItems) => {}
+};
+
+const  CartContext = createContext(defaultValue);
 
 export default CartContext;
