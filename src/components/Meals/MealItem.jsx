@@ -12,6 +12,15 @@ const MealItem = ({ id, price, description, name }) => {
 
   const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
 
+  // Cart.jsx에게 보낼 데이터를 생성하는 함수
+
+
+    // 선택한 수량 끌어올리기
+    const handleAddToCart = (amount) => {
+        console.log('선택한 수량 : ' + amount );
+    }
+
+
   return (
     <li className={meal}>
       <div>
@@ -20,7 +29,7 @@ const MealItem = ({ id, price, description, name }) => {
         <div className={priceStyle}>{formatPrice}원</div>
       </div>
       <div>
-        <MealItemForm id={id} />
+        <MealItemForm id={id} onAddToCart={handleAddToCart}/>
       </div>
     </li>
   );
