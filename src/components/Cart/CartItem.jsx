@@ -1,9 +1,13 @@
 import styles from './CartItem.module.scss';
+import {useContext} from 'react';
+import CartContext from '../../context/cart-context.js';
 
 
 const CartItem = ({ cart }) => {
 
-    const { name, price, amount } = cart;
+    const {addToCartItem }=useContext(CartContext);
+
+    const { id, name, price, amount } = cart;
 
     const {
         'cart-item': cartItem,
@@ -14,6 +18,15 @@ const CartItem = ({ cart }) => {
     } = styles;
 
     const formatPrice = new Intl.NumberFormat('ko-KR').format(price);
+
+    const handleAddClick = e => {
+        addToCartItem({
+            id,
+            name,
+            amount: 1,
+            price : price / amount
+        });
+    }
 
     return (
         <li className={cartItem}>
@@ -26,7 +39,7 @@ const CartItem = ({ cart }) => {
             </div>
             <div className={actions}>
                 <button>−</button>
-                <button>+</button>
+                <button onClick={handleAddClick}>+</button>
             </div>
         </li>
     );
