@@ -1,10 +1,10 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 import IconButton from '../UI/IconButton';
 import MinusIcon from '../UI/Icons/MinusIcon';
 import PlusIcon from '../UI/Icons/PlusIcon';
 import CounterOutput from './CounterOutput';
-import { log } from '../../log';
+import {log} from '../../log';
 import CounterHistory from './CounterHistory.jsx';
 
 const isPrime = (number) => {
@@ -24,7 +24,7 @@ const isPrime = (number) => {
     return true;
 };
 
-const Counter = ({ initialCount }) => {
+const Counter = ({initialCount}) => {
     log('<Counter /> rendered', 1);
 
     const initialCountIsPrime = isPrime(initialCount);
@@ -34,6 +34,10 @@ const Counter = ({ initialCount }) => {
     // => [{ id: 'x1', value: -1 }, { id: 'x2', value: 1 }, ...]
     const [counterChanges, setCounterChanges]
         = useState([{id: Math.random().toString(), value: initialCount}]);
+
+    // useEffect(() => {
+    //     setCounterChanges([{id: Math.random().toString(), value: initialCount}]);
+    // }, [initialCount]);
 
 
     // const [counter, setCounter] = useState(initialCount);
@@ -52,8 +56,8 @@ const Counter = ({ initialCount }) => {
     const totalCount = counterChanges.reduce((acc, curr) => acc + curr.value, 0);
 
     return (
-        <section className='counter'>
-            <p className='counter-info'>
+        <section className="counter">
+            <p className="counter-info">
                 The initial counter value was <strong>{initialCount}</strong>. It{' '}
                 <strong>is {initialCountIsPrime ? 'a' : 'not a'}</strong> prime number.
             </p>
@@ -63,7 +67,7 @@ const Counter = ({ initialCount }) => {
                     onClick={decrementHandler}>
                     Decrement
                 </IconButton>
-                <CounterOutput value={totalCount} />
+                <CounterOutput value={totalCount}/>
                 <IconButton
                     icon={PlusIcon}
                     onClick={incrementHandler}>
@@ -71,7 +75,7 @@ const Counter = ({ initialCount }) => {
                 </IconButton>
             </p>
 
-            <CounterHistory history={counterChanges} />
+            <CounterHistory history={counterChanges}/>
 
         </section>
     );
